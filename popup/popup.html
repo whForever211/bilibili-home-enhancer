@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  body { width: 320px; margin: 0; padding: 14px 16px 12px; font: 13px/1.5 system-ui, "Microsoft YaHei", sans-serif; color: #18191c; }
+  h1 { font-size: 15px; margin: 0 0 10px; color: #fb7299; }
+  .quick { display: flex; gap: 8px; margin-bottom: 12px; }
+  .quick div { flex: 1; background: #fff5f8; border-radius: 8px; padding: 8px 4px; text-align: center; }
+  .quick b { display: block; font-size: 17px; color: #fb7299; }
+  .quick span { font-size: 11px; color: #9499a0; }
+  label.item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid #f1f2f3; cursor: pointer; }
+  label.item.first { border-top: none; }
+  label.sub { color: #61666d; padding-left: 26px; font-size: 12px; }
+  input[type=checkbox] { accent-color: #fb7299; margin: 0; }
+  input[type=number] { width: 54px; border: 1px solid #e3e5e7; border-radius: 6px; padding: 3px 6px; }
+  input[type=range] { flex: 1; accent-color: #fb7299; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  #ratioVal { width: 40px; text-align: right; color: #fb7299; }
+  #clearHistory { margin-top: 12px; width: 100%; border: 1px solid #e3e5e7; background: #fff; border-radius: 8px; padding: 8px; cursor: pointer; color: #61666d; }
+  #clearHistory:hover { color: #fb7299; border-color: #fb7299; }
+  .tip { margin: 10px 0 0; font-size: 11px; color: #9499a0; }
+</style>
+</head>
+<body>
+  <h1>B站首页增强</h1>
+  <div class="quick">
+    <div><b id="qAds">0</b><span>累计隐藏广告</span></div>
+    <div><b id="qInjected">0</b><span>累计破茧注入</span></div>
+    <div><b id="qBatches">0</b><span>已存批次</span></div>
+  </div>
+  <label class="item first"><input type="checkbox" id="adFilter"> 隐藏推荐位广告</label>
+  <label class="item sub"><input type="checkbox" id="backfill"> 广告槽原位替换为热门视频（避免错位）</label>
+  <label class="item sub"><input type="checkbox" id="hideLoginCard"> 登录提示等非视频卡一并替换</label>
+  <label class="item"><input type="checkbox" id="history"> 换一换找回（上一批 / 历史面板）</label>
+  <label class="item sub row">历史保留 <input type="number" id="historyDepth" min="10" max="200" step="10"> 批</label>
+  <label class="item sub row">每批记录顶部 <input type="number" id="batchSize" min="4" max="12" step="1"> 个视频</label>
+  <label class="item"><input type="checkbox" id="diversity"> 破茧注入（混入非个性化内容）</label>
+  <label class="item sub row">注入比例 <input type="range" id="diversityRatio" min="0" max="0.5" step="0.05"> <b id="ratioVal">30%</b></label>
+  <label class="item"><input type="checkbox" id="stats"> 茧房统计面板（首页“统计”按钮）</label>
+  <button id="clearHistory">清空推荐历史与统计</button>
+  <p class="tip">仅在 bilibili.com 首页生效；所有数据只保存在本地。修改设置后回到首页自动生效，无需重启浏览器。</p>
+  <p class="tip" id="ver" style="text-align:right;margin-top:6px"></p>
+  <script src="popup.js"></script>
+</body>
+</html>

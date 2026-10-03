@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "B站首页增强（找回推荐 · 去广告 · 破茧）",
+  "short_name": "B站首页增强",
+  "version": "0.2.3",
+  "description": "换一换找回上一批推荐（按钮回退+历史面板）、广告原位替换为热门视频、按比例把顶批末尾换成热门内容破除信息茧房。",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "unlimitedStorage"],
+  "host_permissions": ["https://api.bilibili.com/*"],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "B站首页增强",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.bilibili.com/*"],
+      "js": ["content/bridge-main.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    },
+    {
+      "matches": ["https://www.bilibili.com/*"],
+      "js": [
+        "content/config.js",
+        "content/util.js",
+        "content/capture.js",
+        "content/swap.js",
+        "content/ad-filter.js",
+        "content/diversity.js",
+        "content/history-ui.js",
+        "content/panel.js",
+        "content/index.js"
+      ],
+      "css": ["content/styles.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}
